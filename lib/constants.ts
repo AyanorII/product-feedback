@@ -15,3 +15,7 @@ export const LIVE_COLOR = "#62BCFA";
 export const LIGHT_COLOR = "#FFFFFF";
 export const BACKGROUND_COLOR = "#F2F4FF";
 /* --------------------------------- Colors --------------------------------- */
+
+/* --------------------------------- Product -------------------------------- */
+// export const PRODUCT_CATEGORIES = 
+/* --------------------------------- Product -------------------------------- */
