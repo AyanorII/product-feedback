@@ -7,11 +7,10 @@ import {
   IN_PROGRESS_COLOR,
   LIVE_COLOR,
   PLANNED_COLOR,
-  SECONDARY_MAIN_COLOR,
+  PRIMARY_MAIN_COLOR,
 } from "../lib/constants";
 import { setInProgress, setLive, setPlanned } from "../store/productsSlice";
 import { RootState } from "../store/store";
-import { PRIMARY_MAIN_COLOR } from '../lib/constants';
 
 const RoadmapCard = () => {
   const dispatch = useDispatch();
@@ -49,7 +48,7 @@ const RoadmapCard = () => {
 
   return (
     <Card sx={{ padding: 3, borderRadius: "10px" }}>
-      <CardContent>
+      <CardContent sx={{ padding: 0 }}>
         <Stack
           flexDirection="row"
           justifyContent="space-between"

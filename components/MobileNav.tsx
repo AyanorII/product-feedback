@@ -26,6 +26,7 @@ const MobileNav = ({ isMenuOpen }: Props) => {
       sx={{
         transition: "all 0.3s ease-in-out",
         backgroundColor: BACKGROUND_COLOR,
+        maxWidth: "65%"
       }}
     >
       <CategoriesCard />
