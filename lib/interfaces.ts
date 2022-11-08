@@ -44,3 +44,5 @@ export interface Product {
   updatedAt?: Date;
   comments?: Comment[];
 }
+
+export type AllCategories = "all" | ProductCategory;

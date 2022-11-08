@@ -75,6 +75,9 @@ let theme = createTheme({
           fontWeight: "bold",
           padding: "0.5rem 1rem",
           borderRadius: "10px",
+          "&:hover": {
+            backgroundColor: `${PRIMARY_LIGHT_COLOR}85`,
+          },
           "&.active": {
             backgroundColor: PRIMARY_MAIN_COLOR,
             color: LIGHT_COLOR,

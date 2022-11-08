@@ -1,15 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AllCategories, ProductCategory } from "../lib/interfaces";
 
 type ProductsState = {
   planned: number;
   live: number;
   inProgress: number;
+  activeCategory: AllCategories;
 };
 
 const initialState: ProductsState = {
   planned: 0,
   live: 0,
   inProgress: 0,
+  activeCategory: "all",
 };
 
 const slice = createSlice({
@@ -28,9 +31,14 @@ const slice = createSlice({
       ...state,
       inProgress: action.payload,
     }),
+    setActiveCategory: (state, action: PayloadAction<AllCategories>) => ({
+      ...state,
+      activeCategory: action.payload,
+    }),
   },
 });
 
-export const { setPlanned, setLive, setInProgress } = slice.actions;
+export const { setPlanned, setLive, setInProgress, setActiveCategory } =
+  slice.actions;
 
 export default slice.reducer;
