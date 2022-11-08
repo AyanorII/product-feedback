@@ -11,6 +11,7 @@ import {
 } from "../lib/constants";
 import { setInProgress, setLive, setPlanned } from "../store/productsSlice";
 import { RootState } from "../store/store";
+import { PRIMARY_MAIN_COLOR } from '../lib/constants';
 
 const RoadmapCard = () => {
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ const RoadmapCard = () => {
           <Link
             href="TODO"
             style={{
-              color: SECONDARY_MAIN_COLOR,
+              color: PRIMARY_MAIN_COLOR,
               textDecoration: "underline",
               fontWeight: "bold",
             }}

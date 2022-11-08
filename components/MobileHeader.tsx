@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import {
   DANGER_LIGHT_COLOR,
   LIVE_COLOR,
-  PRIMARY_MAIN_COLOR,
+  SECONDARY_MAIN_COLOR,
 } from "../lib/constants";
 import { setHeaderHeight } from "../store/navSlice";
 import MobileNav from "./MobileNav";
@@ -37,7 +37,7 @@ const MobileHeader = (props: Props) => {
       padding="1rem 1.5rem"
       component="header"
       sx={{
-        background: `linear-gradient(211deg, ${DANGER_LIGHT_COLOR} 0%, ${PRIMARY_MAIN_COLOR} 46%, ${LIVE_COLOR} 100%)`,
+        background: `linear-gradient(211deg, ${DANGER_LIGHT_COLOR} 0%, ${SECONDARY_MAIN_COLOR} 46%, ${LIVE_COLOR} 100%)`,
       }}
       ref={ref}
     >

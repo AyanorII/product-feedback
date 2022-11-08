@@ -71,14 +71,14 @@ let theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: BACKGROUND_COLOR,
-          color: SECONDARY_MAIN_COLOR,
+          color: PRIMARY_MAIN_COLOR,
           fontWeight: "bold",
           padding: "0.5rem 1rem",
           borderRadius: "10px",
           "&.active": {
-            backgroundColor: SECONDARY_MAIN_COLOR,
+            backgroundColor: PRIMARY_MAIN_COLOR,
             color: LIGHT_COLOR,
-          }
+          },
         },
       },
     },

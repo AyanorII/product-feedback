@@ -1,4 +1,4 @@
-import { Paper, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useSelector } from "react-redux";
 import { BACKGROUND_COLOR } from "../lib/constants";
 import { RootState } from "../store/store";
@@ -21,6 +21,7 @@ const MobileNav = ({ isMenuOpen }: Props) => {
       top={headerHeight}
       bottom={0}
       padding={3}
+      zIndex={100}
       right={isMenuOpen ? 0 : "-100%"}
       sx={{
         transition: "all 0.3s ease-in-out",
