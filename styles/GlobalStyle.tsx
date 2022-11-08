@@ -2,9 +2,10 @@ import { BACKGROUND_COLOR } from "../lib/constants";
 
 export const globalStyles = {
   body: {
-    overflow: "hidden",
+    overflowX: "hidden",
     maxWidth: "100vw",
-    backgroundColor: BACKGROUND_COLOR
+    backgroundColor: BACKGROUND_COLOR,
+    maxHeight: "100vh",
   },
 
   "*": {

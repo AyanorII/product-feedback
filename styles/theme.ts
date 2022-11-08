@@ -85,6 +85,24 @@ let theme = createTheme({
         },
       },
     },
+    MuiSelect: {
+      styleOverrides: {
+        icon: {
+          color: "#FFF",
+        },
+        select: {
+          color: "#FFF",
+          fontWeight: "bold",
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: "10px",
+        },
+      },
+    },
   },
   typography: {
     fontFamily: "Jost, sans-serif",
