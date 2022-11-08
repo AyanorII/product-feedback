@@ -25,7 +25,7 @@ export interface Comment {
   content: string;
   user: User;
   userId: string;
-  product?: Product;
+  product: Product;
   productId: string;
   createdAt?: Date;
   updatedAt?: Date;
@@ -39,10 +39,17 @@ export interface Product {
   status: ProductStatus;
   upvotes: number;
   userId: string;
-  user?: User;
+  user: User;
   createdAt?: Date;
   updatedAt?: Date;
-  comments?: Comment[];
+  comments: Comment[];
 }
 
 export type AllCategories = "all" | ProductCategory;
+
+export enum SortProductsBy {
+  MOST_UPVOTES = "most upvotes",
+  LEAST_UPVOTES = "least upvotes",
+  MOST_COMMENTS = "most comments",
+  LEAST_COMMENTS = "least comments",
+}
