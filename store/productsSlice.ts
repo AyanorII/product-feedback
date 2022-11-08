@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AllCategories, ProductCategory } from "../lib/interfaces";
+import { AllCategories, SortProductsBy } from "../lib/interfaces";
 
 type ProductsState = {
   planned: number;
   live: number;
   inProgress: number;
   activeCategory: AllCategories;
+  sortByOption: SortProductsBy;
 };
 
 const initialState: ProductsState = {
@@ -13,6 +14,7 @@ const initialState: ProductsState = {
   live: 0,
   inProgress: 0,
   activeCategory: "all",
+  sortByOption: SortProductsBy.MOST_UPVOTES,
 };
 
 const slice = createSlice({
@@ -35,10 +37,19 @@ const slice = createSlice({
       ...state,
       activeCategory: action.payload,
     }),
+    setSortByOption: (state, action: PayloadAction<SortProductsBy>) => ({
+      ...state,
+      sortByOption: action.payload,
+    }),
   },
 });
 
-export const { setPlanned, setLive, setInProgress, setActiveCategory } =
-  slice.actions;
+export const {
+  setPlanned,
+  setLive,
+  setInProgress,
+  setActiveCategory,
+  setSortByOption,
+} = slice.actions;
 
 export default slice.reducer;

@@ -1,6 +1,8 @@
 import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import { Provider } from "react-redux";
+import FilterAddFeedback from "../components/FilterAddFeedback";
 import MobileHeader from "../components/MobileHeader";
 import store from "../store/store";
 import "../styles/globals.css";
@@ -9,14 +11,25 @@ import theme from "../styles/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <GlobalStyles styles={globalStyles} />
-        <MobileHeader />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </Provider>
+    <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Jost:wght@300;500;600&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <GlobalStyles styles={globalStyles} />
+          <MobileHeader />
+          <FilterAddFeedback />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </Provider>
+    </>
   );
 }
 
