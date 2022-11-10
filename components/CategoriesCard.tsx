@@ -1,5 +1,6 @@
 import { Card, CardContent, Chip, Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import { capitalize } from "../lib/helpers";
 import { AllCategories, ProductCategory } from "../lib/interfaces";
 import { setActiveCategory } from "../store/productsSlice";
 import { RootState } from "../store/store";
@@ -28,7 +29,7 @@ const CategoriesCard = (props: Props) => {
           {Object.values(ProductCategory).map((category) => (
             <Chip
               key={category}
-              label={category}
+              label={capitalize(category)}
               onClick={() => handleActiveCategory(category)}
               className={activeCategory === category ? "active" : ""}
             />
