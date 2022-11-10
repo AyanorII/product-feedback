@@ -1,53 +1,37 @@
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
-import axios from "axios";
 import Link from "next/link";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   IN_PROGRESS_COLOR,
   LIVE_COLOR,
   PLANNED_COLOR,
   PRIMARY_MAIN_COLOR,
 } from "../lib/constants";
-import { setInProgress, setLive, setPlanned } from "../store/productsSlice";
 import { RootState } from "../store/store";
 
 const RoadmapCard = () => {
-  const dispatch = useDispatch();
-
-  const getProductsCounts = async () => {
-    const response = await axios.get("http://localhost:8000/products/count");
-    const { in_progress: inProgress, live, planned } = await response.data;
-
-    dispatch(setInProgress(inProgress));
-    dispatch(setLive(live));
-    dispatch(setPlanned(planned));
-  };
-
-  useEffect(() => {
-    getProductsCounts();
-  }, []);
-
   const statuses: IStatus[] = [
     {
       label: "Planned",
       color: PLANNED_COLOR,
-      quantity: useSelector((state: RootState) => state.products.planned),
+      quantity: useSelector((state: RootState) => state.products.plannedCount),
     },
     {
       label: "In-Progress",
       color: IN_PROGRESS_COLOR,
-      quantity: useSelector((state: RootState) => state.products.inProgress),
+      quantity: useSelector(
+        (state: RootState) => state.products.inProgressCount
+      ),
     },
     {
       label: "Live",
       color: LIVE_COLOR,
-      quantity: useSelector((state: RootState) => state.products.live),
+      quantity: useSelector((state: RootState) => state.products.liveCount),
     },
   ];
 
   return (
-    <Card sx={{ padding: 3, borderRadius: "10px" }}>
+    <Card sx={{ padding: 3, borderRadius: "10px", height: "100%" }}>
       <CardContent sx={{ padding: "0 !important" }}>
         <Stack
           flexDirection="row"

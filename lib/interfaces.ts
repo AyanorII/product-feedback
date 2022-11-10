@@ -6,11 +6,11 @@ export enum ProductStatus {
 }
 
 export enum ProductCategory {
-  UI = "UI",
-  UX = "UX",
-  ENHANCEMENT = "Enhancement",
-  BUG = "Bug",
-  FEATURE = "Feature",
+  UI = "ui",
+  UX = "ux",
+  ENHANCEMENT = "enhancement",
+  BUG = "bug",
+  FEATURE = "feature",
 }
 
 export interface User {

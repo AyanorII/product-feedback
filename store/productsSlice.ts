@@ -2,17 +2,19 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AllCategories, SortProductsBy } from "../lib/interfaces";
 
 type ProductsState = {
-  planned: number;
-  live: number;
-  inProgress: number;
+  plannedCount: number;
+  liveCount: number;
+  inProgressCount: number;
+  suggestionCount: number;
   activeCategory: AllCategories;
   sortByOption: SortProductsBy;
 };
 
 const initialState: ProductsState = {
-  planned: 0,
-  live: 0,
-  inProgress: 0,
+  plannedCount: 0,
+  liveCount: 0,
+  suggestionCount: 0,
+  inProgressCount: 0,
   activeCategory: "all",
   sortByOption: SortProductsBy.MOST_UPVOTES,
 };
@@ -21,17 +23,21 @@ const slice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    setPlanned: (state, action) => ({
+    setPlanned: (state, action: PayloadAction<number>) => ({
       ...state,
-      planned: action.payload,
+      plannedCount: action.payload,
     }),
-    setLive: (state, action) => ({
+    setLive: (state, action: PayloadAction<number>) => ({
       ...state,
-      live: action.payload,
+      liveCount: action.payload,
     }),
-    setInProgress: (state, action) => ({
+    setInProgress: (state, action: PayloadAction<number>) => ({
       ...state,
-      inProgress: action.payload,
+      inProgressCount: action.payload,
+    }),
+    setSuggestion: (state, action: PayloadAction<number>) => ({
+      ...state,
+      suggestionCount: action.payload,
     }),
     setActiveCategory: (state, action: PayloadAction<AllCategories>) => ({
       ...state,
@@ -48,6 +54,7 @@ export const {
   setPlanned,
   setLive,
   setInProgress,
+  setSuggestion,
   setActiveCategory,
   setSortByOption,
 } = slice.actions;
