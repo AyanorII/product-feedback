@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface NavState {
   open: boolean;
@@ -14,9 +14,9 @@ export const slice = createSlice({
   name: "nav",
   initialState,
   reducers: {
-    toggleMenu: (state: NavState) => ({
+    setOpen: (state: NavState, action: PayloadAction<boolean>) => ({
       ...state,
-      open: !state.open,
+      open: action.payload,
     }),
 
     setHeaderHeight: (state: NavState, action) => ({
@@ -26,6 +26,6 @@ export const slice = createSlice({
   },
 });
 
-export const { toggleMenu, setHeaderHeight } = slice.actions;
+export const { setOpen, setHeaderHeight } = slice.actions;
 
 export default slice.reducer;

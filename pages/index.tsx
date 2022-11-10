@@ -1,8 +1,11 @@
-import { Container, Stack } from "@mui/material";
+import { Box, Container, Stack, useMediaQuery } from "@mui/material";
 import axios from "axios";
 import type { NextPage } from "next";
 import { GetServerSideProps } from "next";
 import { useSelector } from "react-redux";
+import FilterAddFeedback from "../components/FilterAddFeedback";
+import Header from "../components/Header";
+import MobileHeader from "../components/MobileHeader";
 import ProductCard from "../components/ProductCard";
 import { Product, SortProductsBy } from "../lib/interfaces";
 import { RootState } from "../store/store";
@@ -27,11 +30,13 @@ const Home: NextPage<Props> = ({ products }) => {
     (state: RootState) => state.products.sortByOption
   );
 
-  const sortProducts = (
-    a: Product,
-    b: Product,
-    sort: SortProductsBy
-  ): number => {
+  const headerHeight = useSelector(
+    (state: RootState) => state.nav.headerHeight
+  );
+
+  const isMenuOpen = useSelector((state: RootState) => state.nav.open);
+
+  const sortProducts = (a: Product, b: Product): number => {
     switch (sortByOption) {
       case SortProductsBy.MOST_UPVOTES:
         return b.upvotes - a.upvotes;
@@ -46,18 +51,38 @@ const Home: NextPage<Props> = ({ products }) => {
     }
   };
 
-  const sortedProducts = products.sort((a, b) =>
-    sortProducts(a, b, sortByOption)
-  );
+  const sortedProducts = products.sort((a, b) => sortProducts(a, b));
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <Container>
-      <Stack gap={1.5} mt={3}>
-        {sortedProducts.map((product) => {
-          return <ProductCard key={product.id} product={product} />;
-        })}
-      </Stack>
-    </Container>
+    <>
+      {isMobile ? <MobileHeader /> : <Header />}
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          "&:before": {
+            display: isMenuOpen ? "block" : "none",
+            content: "''",
+            position: "absolute",
+            top: `${headerHeight}px`,
+            inset: 0,
+            background: "#00000076",
+            zIndex: 100,
+          },
+        }}
+      >
+        <FilterAddFeedback />
+        <Container maxWidth="md">
+          <Stack gap={1.5} mt={3}>
+            {sortedProducts.map((product) => {
+              return <ProductCard key={product.id} product={product} />;
+            })}
+          </Stack>
+        </Container>
+      </Box>
+    </>
   );
 };
 

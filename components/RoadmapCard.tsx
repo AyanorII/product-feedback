@@ -17,7 +17,7 @@ const RoadmapCard = () => {
 
   const getProductsCounts = async () => {
     const response = await axios.get("http://localhost:8000/products/count");
-    const { inProgress, live, planned } = await response.data;
+    const { in_progress: inProgress, live, planned } = await response.data;
 
     dispatch(setInProgress(inProgress));
     dispatch(setLive(live));
@@ -48,7 +48,7 @@ const RoadmapCard = () => {
 
   return (
     <Card sx={{ padding: 3, borderRadius: "10px" }}>
-      <CardContent sx={{ padding: 0 }}>
+      <CardContent sx={{ padding: "0 !important" }}>
         <Stack
           flexDirection="row"
           justifyContent="space-between"

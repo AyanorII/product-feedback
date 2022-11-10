@@ -6,6 +6,7 @@ import {
   Select,
   Stack,
   SxProps,
+  useMediaQuery,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { INFO_DARK_COLOR } from "../lib/constants";
@@ -38,13 +39,31 @@ const FilterAddFeedback = (props: Props) => {
     },
   };
 
+  const isTablet = useMediaQuery("(max-width: 600px)");
+
   return (
     <Container
+      maxWidth="md"
       sx={{
-        backgroundColor: INFO_DARK_COLOR,
+        backgroundColor: isTablet ? INFO_DARK_COLOR : "transparent",
+        paddingTop: {
+          sm: 2
+        }
       }}
     >
-      <Stack flexDirection="row" alignItems="center" gap={2}>
+      <Stack
+        flexDirection="row"
+        alignItems="center"
+        gap={2}
+        sx={{
+          backgroundColor: INFO_DARK_COLOR,
+          padding: {
+            xs: "0",
+            sm: "0.5rem 1rem",
+          },
+          borderRadius: "10px",
+        }}
+      >
         <Select
           defaultValue="most upvotes"
           onChange={(e) =>

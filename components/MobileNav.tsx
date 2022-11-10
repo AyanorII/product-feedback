@@ -27,6 +27,7 @@ const MobileNav = ({ isMenuOpen }: Props) => {
         transition: "all 0.3s ease-in-out",
         backgroundColor: BACKGROUND_COLOR,
         maxWidth: "65%",
+        zIndex: 101
       }}
     >
       <CategoriesCard />

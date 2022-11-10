@@ -18,7 +18,7 @@ const CategoriesCard = (props: Props) => {
 
   return (
     <Card sx={{ padding: 3, borderRadius: "10px" }}>
-      <CardContent sx={{padding: 0}}>
+      <CardContent sx={{ padding: 0 }}>
         <Stack flexDirection="row" gap={1.5} flexWrap="wrap">
           <Chip
             label="All"

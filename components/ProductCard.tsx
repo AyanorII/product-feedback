@@ -16,12 +16,12 @@ const ProductCard = ({ product }: Props) => {
   return (
     <Card>
       <CardContent sx={{ padding: 3 }}>
-        <Typography fontWeight="bold">{title}</Typography>
-        <Typography color="GrayText" variant="body2">
+        <Typography fontWeight="bold" variant="h6" gutterBottom>{title}</Typography>
+        <Typography color="GrayText" variant="body2" gutterBottom>
           {description}
         </Typography>
         <Chip label={capitalize(category)} sx={{ marginTop: 1 }} />
-        <Stack flexDirection="row" justifyContent="space-between" mt={1}>
+        <Stack flexDirection="row" justifyContent="space-between" mt={1.5}>
           <Chip
             label={
               <>
