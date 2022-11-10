@@ -1,4 +1,5 @@
 import { Add } from "@mui/icons-material";
+import IdeaIcon from "@mui/icons-material/TipsAndUpdates";
 import {
   Button,
   Container,
@@ -6,13 +7,14 @@ import {
   Select,
   Stack,
   SxProps,
-  useMediaQuery,
+  Typography,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { INFO_DARK_COLOR } from "../lib/constants";
 import { capitalize } from "../lib/helpers";
 import { SortProductsBy } from "../lib/interfaces";
 import { setSortByOption } from "../store/productsSlice";
+import { RootState } from "../store/store";
 
 type Props = {};
 
@@ -39,31 +41,43 @@ const FilterAddFeedback = (props: Props) => {
     },
   };
 
-  const isTablet = useMediaQuery("(max-width: 600px)");
+  const totalSuggestions = useSelector(
+    (state: RootState) => state.products.suggestionCount
+  );
+
+  const containerStyles: SxProps = {
+    backgroundColor: {
+      xs: INFO_DARK_COLOR,
+      sm: "transparent",
+    },
+    paddingTop: {
+      sm: 2,
+    },
+  };
+
+  const stackStyles: SxProps = {
+    backgroundColor: INFO_DARK_COLOR,
+    padding: {
+      xs: "0",
+      sm: "0.5rem 1rem",
+    },
+    borderRadius: "10px",
+  };
 
   return (
-    <Container
-      maxWidth="md"
-      sx={{
-        backgroundColor: isTablet ? INFO_DARK_COLOR : "transparent",
-        paddingTop: {
-          sm: 2
-        }
-      }}
-    >
-      <Stack
-        flexDirection="row"
-        alignItems="center"
-        gap={2}
-        sx={{
-          backgroundColor: INFO_DARK_COLOR,
-          padding: {
-            xs: "0",
-            sm: "0.5rem 1rem",
-          },
-          borderRadius: "10px",
-        }}
-      >
+    <Container maxWidth="md" sx={containerStyles}>
+      <Stack flexDirection="row" alignItems="center" gap={4} sx={stackStyles}>
+        <Stack
+          flexDirection="row"
+          gap={2}
+          display={{ xs: "none", sm: "flex" }}
+          color="white"
+        >
+          <IdeaIcon />
+          <Typography fontWeight="bold">
+            {totalSuggestions} Suggestions
+          </Typography>
+        </Stack>
         <Select
           defaultValue="most upvotes"
           onChange={(e) =>
