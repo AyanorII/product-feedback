@@ -1,34 +1,17 @@
 import { Box, Container, Stack, useMediaQuery } from "@mui/material";
-import axios from "axios";
 import type { NextPage } from "next";
-import { GetServerSideProps } from "next";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  useGetProductsCountQuery,
+  useGetSuggestionsQuery,
+} from "../api/productApi";
 import FilterAddFeedback from "../components/FilterAddFeedback";
 import Header from "../components/Header";
 import MobileHeader from "../components/MobileHeader";
 import ProductCard from "../components/ProductCard";
 import { Product, SortProductsBy } from "../lib/interfaces";
-import { setInProgress, setLive, setPlanned, setSuggestion } from "../store/productsSlice";
+import { setInProgress, setLive, setPlanned } from "../store/productsSlice";
 import { RootState } from "../store/store";
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const suggestionsResponse = await axios.get(
-    process.env.API_URL! + "/products/suggestions"
-  );
-  const { data: suggestions } = suggestionsResponse;
-
-  const productsCountResponse = await axios.get(
-    process.env.API_URL! + "/products/count"
-  );
-  const { data: productsCount } = productsCountResponse;
-
-  return {
-    props: {
-      products: suggestions,
-      count: productsCount,
-    },
-  };
-};
 
 type Props = {
   products: Product[];
@@ -37,18 +20,20 @@ type Props = {
     live: number;
     planned: number;
     suggestion: number;
-  }
+  };
 };
 
-const Home: NextPage<Props> = ({ products, count }) => {
+const Home: NextPage<Props> = () => {
   const dispatch = useDispatch();
+  const { data: suggestions } = useGetSuggestionsQuery();
+  const { data: productsCount } = useGetProductsCountQuery();
 
-  const { in_progress: inProgress, live, planned, suggestion } = count;
-
-  dispatch(setInProgress(inProgress));
-  dispatch(setLive(live));
-  dispatch(setPlanned(planned));
-  dispatch(setSuggestion(suggestion));
+  if (productsCount) {
+    const { inProgress, planned, live } = productsCount;
+    dispatch(setInProgress(inProgress));
+    dispatch(setLive(live));
+    dispatch(setPlanned(planned));
+  }
 
   const sortByOption = useSelector(
     (state: RootState) => state.products.sortByOption
@@ -79,9 +64,14 @@ const Home: NextPage<Props> = ({ products, count }) => {
     }
   };
 
-  const sortedProducts = products.sort((a, b) => sortProducts(a, b));
+  const sortedProducts = suggestions
+    ? [...suggestions].sort((a, b) => sortProducts(a, b))
+    : [];
+
   const filteredProducts = sortedProducts.filter((product) =>
-    filterByOption === "all" ? product : product.category === filterByOption
+    filterByOption === "all"
+      ? product
+      : product.category.toLowerCase() === filterByOption
   );
 
   const isMobile = useMediaQuery("(max-width: 768px)");

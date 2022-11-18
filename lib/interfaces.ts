@@ -53,3 +53,9 @@ export enum SortProductsBy {
   MOST_COMMENTS = "most comments",
   LEAST_COMMENTS = "least comments",
 }
+
+export interface ProductsCount {
+  planned: number;
+  live: number;
+  inProgress: number;
+}

@@ -17,6 +17,7 @@
     "@types/redux": "^3.6.0",
     "axios": "^1.1.3",
     "next": "13.0.2",
+    "next-redux-wrapper": "^8.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.39.1",
