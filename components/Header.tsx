@@ -1,4 +1,4 @@
-import { Container, Grid, Stack, Typography } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 import {
   DANGER_LIGHT_COLOR,
   LIGHT_COLOR,
@@ -12,19 +12,22 @@ type Props = {};
 
 const Header = (props: Props) => {
   return (
-    <Container maxWidth="md">
-      <Grid container padding="2rem 0 1rem" gap={2} alignItems="stretch">
-        <Grid xs item>
-          <Banner />
-        </Grid>
-        <Grid xs item sx={{ "& > div": { height: "100%" } }}>
-          <CategoriesCard />
-        </Grid>
-        <Grid xs item>
-          <RoadmapCard />
-        </Grid>
+    <Grid
+      container
+      padding={{ xs: "2rem 0 1rem", lg: 0 }}
+      gap={2}
+      alignItems="stretch"
+    >
+      <Grid item xs lg={12}>
+        <Banner />
       </Grid>
-    </Container>
+      <Grid item xs lg={12} sx={{ "& > div": { height: "100%" } }}>
+        <CategoriesCard />
+      </Grid>
+      <Grid item xs lg={12}>
+        <RoadmapCard />
+      </Grid>
+    </Grid>
   );
 };
 

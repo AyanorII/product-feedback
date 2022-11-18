@@ -8,6 +8,7 @@ import {
   Stack,
   SxProps,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { INFO_DARK_COLOR } from "../lib/constants";
@@ -52,6 +53,7 @@ const FilterAddFeedback = (props: Props) => {
     },
     paddingTop: {
       sm: 2,
+      lg: 0
     },
   };
 
@@ -64,8 +66,10 @@ const FilterAddFeedback = (props: Props) => {
     borderRadius: "10px",
   };
 
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
-    <Container maxWidth="md" sx={containerStyles}>
+    <Container maxWidth={false} disableGutters={!isMobile} sx={containerStyles}>
       <Stack flexDirection="row" alignItems="center" gap={4} sx={stackStyles}>
         <Stack
           flexDirection="row"

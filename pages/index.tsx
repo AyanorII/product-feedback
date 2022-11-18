@@ -1,4 +1,4 @@
-import { Box, Container, Stack, useMediaQuery } from "@mui/material";
+import { Box, Container, Grid, Stack, useMediaQuery } from "@mui/material";
 import type { NextPage } from "next";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -83,33 +83,40 @@ const Home: NextPage<Props> = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <>
-      {isMobile ? <MobileHeader /> : <Header />}
-      <Box
-        sx={{
-          position: "relative",
-          overflow: "hidden",
-          "&:before": {
-            display: isMenuOpen ? "block" : "none",
-            content: "''",
-            position: "absolute",
-            top: `${headerHeight}px`,
-            inset: 0,
-            background: "#00000076",
-            zIndex: 100,
-          },
-        }}
-      >
-        <FilterAddFeedback />
-        <Container maxWidth="md">
-          <Stack gap={1.5} mt={3}>
-            {filteredProducts.map((product) => {
-              return <ProductCard key={product.id} product={product} />;
-            })}
-          </Stack>
-        </Container>
-      </Box>
-    </>
+    <Container disableGutters={isMobile} sx={{ marginTop: { lg: 6 } }}>
+      <Grid container spacing={{ lg: 3 }}>
+        <Grid item xs={12} lg={3}>
+          {isMobile ? <MobileHeader /> : <Header />}
+        </Grid>
+        <Grid item xs={12} lg={9}>
+          <Box
+            sx={{
+              position: "relative",
+              overflow: "hidden",
+              flexGrow: 1,
+              "&:before": {
+                display: isMenuOpen ? "block" : "none",
+                content: "''",
+                position: "absolute",
+                top: `${headerHeight}px`,
+                inset: 0,
+                background: "#00000076",
+                zIndex: 100,
+              },
+            }}
+          >
+            <FilterAddFeedback />
+            <Container disableGutters={!isMobile}>
+              <Stack gap={1.5} mt={3}>
+                {filteredProducts.map((product) => {
+                  return <ProductCard key={product.id} product={product} />;
+                })}
+              </Stack>
+            </Container>
+          </Box>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
