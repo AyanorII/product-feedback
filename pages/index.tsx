@@ -10,7 +10,12 @@ import Header from "../components/Header";
 import MobileHeader from "../components/MobileHeader";
 import ProductCard from "../components/ProductCard";
 import { Product, SortProductsBy } from "../lib/interfaces";
-import { setInProgress, setLive, setPlanned } from "../store/productsSlice";
+import {
+  setInProgress,
+  setLive,
+  setPlanned,
+  setSuggestion,
+} from "../store/productsSlice";
 import { RootState } from "../store/store";
 
 type Props = {
@@ -29,10 +34,11 @@ const Home: NextPage<Props> = () => {
   const { data: productsCount } = useGetProductsCountQuery();
 
   if (productsCount) {
-    const { inProgress, planned, live } = productsCount;
+    const { inProgress, planned, live, suggestion } = productsCount;
     dispatch(setInProgress(inProgress));
     dispatch(setLive(live));
     dispatch(setPlanned(planned));
+    dispatch(setSuggestion(suggestion));
   }
 
   const sortByOption = useSelector(

@@ -58,4 +58,5 @@ export interface ProductsCount {
   planned: number;
   live: number;
   inProgress: number;
+  suggestion: number;
 }
