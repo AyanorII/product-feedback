@@ -71,7 +71,7 @@ const Home: NextPage<Props> = () => {
   const filteredProducts = sortedProducts.filter((product) =>
     filterByOption === "all"
       ? product
-      : product.category.toLowerCase() === filterByOption
+      : product.category.toLowerCase() === filterByOption.toLowerCase()
   );
 
   const isMobile = useMediaQuery("(max-width: 768px)");

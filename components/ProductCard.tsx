@@ -5,8 +5,8 @@ import { Stack, SxProps } from "@mui/system";
 import axios from "axios";
 import { useState } from "react";
 import { INFO_DARK_COLOR, INFO_LIGHT_COLOR } from "../lib/constants";
-import { capitalize } from "../lib/helpers";
 import { Product } from "../lib/interfaces";
+import CategoryChip from "./CategoryChip";
 
 type Props = {
   product: Product;
@@ -24,7 +24,7 @@ const ProductCard = ({ product }: Props) => {
         <Typography color="GrayText" variant="body2" gutterBottom>
           {description}
         </Typography>
-        <Chip label={capitalize(category)} sx={{ marginTop: 1 }} />
+        <CategoryChip category={category} sx={{mt: 1}}/>
         <Stack flexDirection="row" justifyContent="space-between" mt={1.5}>
           <UpvoteButton product={product} />
           <Button
