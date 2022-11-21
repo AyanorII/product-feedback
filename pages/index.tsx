@@ -1,15 +1,12 @@
 import { Box, Container, Grid, Stack, useMediaQuery } from "@mui/material";
+import axios from "axios";
 import type { NextPage } from "next";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  useGetProductsCountQuery,
-  useGetSuggestionsQuery,
-} from "../api/productApi";
 import FilterAddFeedback from "../components/FilterAddFeedback";
 import Header from "../components/Header";
 import MobileHeader from "../components/MobileHeader";
 import ProductCard from "../components/ProductCard";
-import { Product, SortProductsBy } from "../lib/interfaces";
+import { Product, ProductsCount, SortProductsBy } from "../lib/interfaces";
 import {
   setInProgress,
   setLive,
@@ -18,28 +15,37 @@ import {
 } from "../store/productsSlice";
 import { RootState } from "../store/store";
 
-type Props = {
-  products: Product[];
-  count: {
-    in_progress: number;
-    live: number;
-    planned: number;
-    suggestion: number;
+export const getServerSideProps = async () => {
+  const suggestionsResponse = await axios.get(
+    "http://localhost:8000/products/suggestions"
+  );
+  const { data: suggestions } = await suggestionsResponse;
+
+  const countResponse = await axios.get("http://localhost:8000/products/count");
+
+  const { data: count } = await countResponse;
+
+  return {
+    props: {
+      suggestions,
+      count,
+    },
   };
 };
 
-const Home: NextPage<Props> = () => {
-  const dispatch = useDispatch();
-  const { data: suggestions } = useGetSuggestionsQuery();
-  const { data: productsCount } = useGetProductsCountQuery();
+type Props = {
+  suggestions: Product[];
+  count: ProductsCount;
+};
 
-  if (productsCount) {
-    const { inProgress, planned, live, suggestion } = productsCount;
-    dispatch(setInProgress(inProgress));
-    dispatch(setLive(live));
-    dispatch(setPlanned(planned));
-    dispatch(setSuggestion(suggestion));
-  }
+const Home: NextPage<Props> = ({ suggestions, count }: Props) => {
+  const dispatch = useDispatch();
+
+  const { inProgress, planned, live, suggestion } = count;
+  dispatch(setInProgress(inProgress));
+  dispatch(setLive(live));
+  dispatch(setPlanned(planned));
+  dispatch(setSuggestion(suggestion));
 
   const sortByOption = useSelector(
     (state: RootState) => state.products.sortByOption
