@@ -11,6 +11,8 @@ import RoadmapCard from "./RoadmapCard";
 type Props = {};
 
 const Header = (props: Props) => {
+  const cardHeight = "192px";
+
   return (
     <Grid
       container
@@ -18,13 +20,19 @@ const Header = (props: Props) => {
       gap={2}
       alignItems="stretch"
     >
-      <Grid item xs lg={12}>
+      <Grid item xs lg={12} height={cardHeight}>
         <Banner />
       </Grid>
-      <Grid item xs lg={12} sx={{ "& > div": { height: "100%" } }}>
+      <Grid
+        item
+        xs
+        lg={12}
+        height={cardHeight}
+        sx={{ "& > div": { height: "100%" } }}
+      >
         <CategoriesCard />
       </Grid>
-      <Grid item xs lg={12}>
+      <Grid item xs lg={12} height={cardHeight}>
         <RoadmapCard />
       </Grid>
     </Grid>

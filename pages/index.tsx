@@ -83,7 +83,7 @@ const Home: NextPage<Props> = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <Container disableGutters={isMobile} sx={{ marginTop: { lg: 6 } }}>
+    <Container disableGutters={isMobile} sx={{ marginBlock: { lg: 6 } }}>
       <Grid container spacing={{ lg: 3 }}>
         <Grid item xs={12} lg={3}>
           {isMobile ? <MobileHeader /> : <Header />}
@@ -92,7 +92,10 @@ const Home: NextPage<Props> = () => {
           <Box
             sx={{
               position: "relative",
-              overflow: "hidden",
+              overflow: {
+                xs: "hidden",
+                lg: "visible",
+              },
               flexGrow: 1,
               "&:before": {
                 display: isMenuOpen ? "block" : "none",
