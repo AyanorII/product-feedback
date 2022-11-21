@@ -16,6 +16,7 @@ import { capitalize } from "../../lib/helpers";
 import { SortProductsBy } from "../../lib/interfaces";
 import { setSortByOption } from "../../store/productsSlice";
 import { RootState } from "../../store/store";
+import AddFeedbackButton from "../AddFeedbackButton";
 import {
   containerStyles,
   menuItemStyles,
@@ -70,14 +71,7 @@ const FilterAddFeedback = (props: Props) => {
             </MenuItem>
           ))}
         </Select>
-        <Button
-          color="secondary"
-          variant="contained"
-          startIcon={<Add />}
-          size={isMobile ? "medium" : "large"}
-        >
-          Add Feedback
-        </Button>
+        <AddFeedbackButton />
       </Stack>
     </Container>
   );

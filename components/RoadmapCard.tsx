@@ -42,7 +42,7 @@ const RoadmapCard = () => {
             Roadmap
           </Typography>
           <Link
-            href="TODO"
+            href="/roadmap"
             style={{
               color: PRIMARY_MAIN_COLOR,
               textDecoration: "underline",
