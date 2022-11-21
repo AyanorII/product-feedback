@@ -1,70 +1,40 @@
 import { Add } from "@mui/icons-material";
+import CheckIcon from "@mui/icons-material/Check";
 import IdeaIcon from "@mui/icons-material/TipsAndUpdates";
 import {
   Button,
   Container,
   MenuItem,
   Select,
+  SelectChangeEvent,
   Stack,
-  SxProps,
   Typography,
   useMediaQuery,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { INFO_DARK_COLOR } from "../lib/constants";
-import { capitalize } from "../lib/helpers";
-import { SortProductsBy } from "../lib/interfaces";
-import { setSortByOption } from "../store/productsSlice";
-import { RootState } from "../store/store";
+import { capitalize } from "../../lib/helpers";
+import { SortProductsBy } from "../../lib/interfaces";
+import { setSortByOption } from "../../store/productsSlice";
+import { RootState } from "../../store/store";
+import {
+  containerStyles,
+  menuItemStyles,
+  selectMenuStyles,
+  selectStyles,
+  stackStyles,
+} from "./styles";
 
 type Props = {};
 
 const FilterAddFeedback = (props: Props) => {
   const dispatch = useDispatch();
-
-  const selectStyles: SxProps = {
-    flexGrow: 1,
-    position: "relative",
-    border: "none",
-    fontSize: "0.75rem",
-    "& .MuiSelect-select": {
-      paddingLeft: 0,
-    },
-    "&.Mui-focused .MuiOutlinedInput-notchedOutline": { border: 0 },
-    "& fieldset": {
-      border: "none",
-    },
-    "&:before": {
-      content: "'Sort by:'",
-      color: "white",
-      whiteSpace: "nowrap",
-      marginRight: "8px",
-    },
-  };
+  const sortByOption = useSelector(
+    (state: RootState) => state.products.sortByOption
+  );
 
   const totalSuggestions = useSelector(
     (state: RootState) => state.products.suggestionCount
   );
-
-  const containerStyles: SxProps = {
-    backgroundColor: {
-      xs: INFO_DARK_COLOR,
-      sm: "transparent",
-    },
-    paddingTop: {
-      sm: 2,
-      lg: 0
-    },
-  };
-
-  const stackStyles: SxProps = {
-    backgroundColor: INFO_DARK_COLOR,
-    padding: {
-      xs: "0",
-      sm: "0.5rem 1rem",
-    },
-    borderRadius: "10px",
-  };
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -84,18 +54,28 @@ const FilterAddFeedback = (props: Props) => {
         </Stack>
         <Select
           defaultValue="most upvotes"
-          onChange={(e) =>
+          onChange={(e: SelectChangeEvent) =>
             dispatch(setSortByOption(e.target.value as SortProductsBy))
           }
           sx={selectStyles}
+          MenuProps={{ sx: selectMenuStyles }}
         >
           {Object.values(SortProductsBy).map((sortOption) => (
-            <MenuItem key={sortOption} value={sortOption}>
+            <MenuItem key={sortOption} value={sortOption} sx={menuItemStyles}>
               {capitalize(sortOption)}
+              <CheckIcon
+                color="secondary"
+                sx={{ display: sortOption === sortByOption ? "block" : "none" }}
+              />
             </MenuItem>
           ))}
         </Select>
-        <Button color="secondary" variant="contained" startIcon={<Add />}>
+        <Button
+          color="secondary"
+          variant="contained"
+          startIcon={<Add />}
+          size={isMobile ? "medium" : "large"}
+        >
           Add Feedback
         </Button>
       </Stack>
