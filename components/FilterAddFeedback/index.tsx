@@ -34,7 +34,7 @@ const FilterAddFeedback = (props: Props) => {
   );
 
   const totalSuggestions = useSelector(
-    (state: RootState) => state.products.suggestionCount
+    (state: RootState) => state.products.count.suggestion
   );
 
   const isMobile = useMediaQuery("(max-width: 768px)");

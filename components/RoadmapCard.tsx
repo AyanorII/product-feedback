@@ -14,19 +14,19 @@ const RoadmapCard = () => {
     {
       label: "Planned",
       color: PLANNED_COLOR,
-      quantity: useSelector((state: RootState) => state.products.plannedCount),
+      quantity: useSelector((state: RootState) => state.products.count.planned),
     },
     {
       label: "In-Progress",
       color: IN_PROGRESS_COLOR,
       quantity: useSelector(
-        (state: RootState) => state.products.inProgressCount
+        (state: RootState) => state.products.count.inProgress
       ),
     },
     {
       label: "Live",
       color: LIVE_COLOR,
-      quantity: useSelector((state: RootState) => state.products.liveCount),
+      quantity: useSelector((state: RootState) => state.products.count.live),
     },
   ];
 

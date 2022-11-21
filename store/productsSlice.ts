@@ -2,19 +2,23 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AllCategories, SortProductsBy } from "../lib/interfaces";
 
 type ProductsState = {
-  plannedCount: number;
-  liveCount: number;
-  inProgressCount: number;
-  suggestionCount: number;
+  count: {
+    planned: number;
+    live: number;
+    inProgress: number;
+    suggestion: number;
+  };
   activeCategory: AllCategories;
   sortByOption: SortProductsBy;
 };
 
 const initialState: ProductsState = {
-  plannedCount: 0,
-  liveCount: 0,
-  suggestionCount: 0,
-  inProgressCount: 0,
+  count: {
+    planned: 0,
+    live: 0,
+    inProgress: 0,
+    suggestion: 0,
+  },
   activeCategory: "all",
   sortByOption: SortProductsBy.MOST_UPVOTES,
 };
@@ -25,27 +29,45 @@ const slice = createSlice({
   reducers: {
     setPlanned: (state, action: PayloadAction<number>) => ({
       ...state,
-      plannedCount: action.payload,
+      count: {
+        ...state.count,
+        planned: action.payload,
+      },
     }),
     setLive: (state, action: PayloadAction<number>) => ({
       ...state,
-      liveCount: action.payload,
+      count: {
+        ...state.count,
+        live: action.payload,
+      },
     }),
     setInProgress: (state, action: PayloadAction<number>) => ({
       ...state,
-      inProgressCount: action.payload,
+      count: {
+        ...state.count,
+        inProgress: action.payload,
+      },
     }),
     setSuggestion: (state, action: PayloadAction<number>) => ({
       ...state,
-      suggestionCount: action.payload,
+      count: {
+        ...state.count,
+        suggestion: action.payload,
+      },
     }),
     setActiveCategory: (state, action: PayloadAction<AllCategories>) => ({
       ...state,
-      activeCategory: action.payload,
+      count: {
+        ...state.count,
+        activeCategory: action.payload,
+      },
     }),
     setSortByOption: (state, action: PayloadAction<SortProductsBy>) => ({
       ...state,
-      sortByOption: action.payload,
+      count: {
+        ...state.count,
+        sortByOption: action.payload,
+      },
     }),
   },
 });
