@@ -9,6 +9,7 @@ export const tabsStyles = (color: string): SxProps => {
   return {
     color,
     textTransform: "capitalize",
+    fontWeight: "bold",
     "& .MuiTabs-flexContainer": {
       justifyContent: "space-evenly",
     },

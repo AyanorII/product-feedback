@@ -1,6 +1,7 @@
 import { TabContext, TabPanel } from "@mui/lab";
 import { Box, Tab, Tabs } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   INFO_DARK_COLOR,
   IN_PROGRESS_COLOR,
@@ -8,6 +9,8 @@ import {
   PLANNED_COLOR,
 } from "../../../lib/constants";
 import { ProductStatus } from "../../../lib/interfaces";
+import { RootState } from "../../../store/store";
+import RoadmapColumn, { RoadmapColumnProps } from "../RoadmapColumn";
 import { tabIndicatorStyles, tabsStyles } from "./styles";
 
 type Props = {};
@@ -26,6 +29,26 @@ const RoadmapTabs = (props: Props) => {
     [ProductStatus.SUGGESTION]: INFO_DARK_COLOR,
   };
 
+  const count = useSelector((state: RootState) => state.products.count);
+
+  const columns: RoadmapColumnProps[] = [
+    {
+      status: ProductStatus.PLANNED,
+      quantity: count.planned,
+      description: "Ideas prioritized for research",
+    },
+    {
+      status: ProductStatus.IN_PROGRESS,
+      quantity: count.inProgress,
+      description: "Currently being developed",
+    },
+    {
+      status: ProductStatus.LIVE,
+      quantity: count.live,
+      description: "Released features",
+    },
+  ];
+
   return (
     <TabContext value={value}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -42,9 +65,15 @@ const RoadmapTabs = (props: Props) => {
           <Tab label="Live" value={ProductStatus.LIVE} />
         </Tabs>
       </Box>
-      <TabPanel value={ProductStatus.PLANNED}>Planned</TabPanel>
-      <TabPanel value={ProductStatus.IN_PROGRESS}>In-progress</TabPanel>
-      <TabPanel value={ProductStatus.LIVE}>Live</TabPanel>
+      {columns.map(({ status, quantity, description }) => (
+        <TabPanel key={status} value={status}>
+          <RoadmapColumn
+            status={status}
+            quantity={quantity}
+            description={description}
+          />
+        </TabPanel>
+      ))}
     </TabContext>
   );
 };
