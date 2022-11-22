@@ -57,17 +57,11 @@ const slice = createSlice({
     }),
     setActiveCategory: (state, action: PayloadAction<AllCategories>) => ({
       ...state,
-      count: {
-        ...state.count,
-        activeCategory: action.payload,
-      },
+      activeCategory: action.payload,
     }),
     setSortByOption: (state, action: PayloadAction<SortProductsBy>) => ({
       ...state,
-      count: {
-        ...state.count,
-        sortByOption: action.payload,
-      },
+      sortByOption: action.payload,
     }),
   },
 });
