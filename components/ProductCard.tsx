@@ -1,19 +1,9 @@
-import CommentIcon from "@mui/icons-material/Comment";
-import UpIcon from "@mui/icons-material/KeyboardArrowUp";
-import {
-  Button,
-  Card,
-  CardContent,
-  Chip,
-  Grid,
-  Typography,
-} from "@mui/material";
-import { Stack, SxProps } from "@mui/system";
-import axios from "axios";
-import { useState } from "react";
-import { INFO_DARK_COLOR, INFO_LIGHT_COLOR } from "../lib/constants";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
+import { Stack } from "@mui/system";
 import { Product } from "../lib/interfaces";
 import CategoryChip from "./CategoryChip";
+import CommentButton from "./CommentButton";
+import UpvoteButton from "./UpvoteButton";
 
 type Props = {
   product: Product;
@@ -38,20 +28,7 @@ const ProductCard = ({ product }: Props) => {
             <UpvoteButton product={product} />
           </Grid>
           <Grid item xs={6} sm="auto" display="flex" justifyContent="end">
-            <Button
-              sx={{
-                color: INFO_DARK_COLOR,
-              }}
-              startIcon={
-                <CommentIcon
-                  sx={{
-                    color: INFO_LIGHT_COLOR,
-                  }}
-                />
-              }
-            >
-              {comments?.length || "0"}
-            </Button>
+            <CommentButton comments={comments?.length || 0} />
           </Grid>
         </Grid>
       </CardContent>
@@ -80,49 +57,3 @@ const Info = ({ product }: InfoProps) => {
 };
 
 export default ProductCard;
-
-type UpvoteButtonProps = {
-  product: Product;
-};
-
-const UpvoteButton = ({ product }: UpvoteButtonProps) => {
-  const [upvotes, setUpvotes] = useState(product.upvotes);
-
-  const handleUpvote = async () => {
-    const apiUrl = `http://localhost:8000/products/${product.id}/upvote`;
-
-    try {
-      const response = await axios.patch(apiUrl);
-      const { data } = response;
-
-      setUpvotes(data.upvotes);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const chipStyles: SxProps = {
-    paddingBlock: { lg: "2rem" },
-    "& span": {
-      display: "flex",
-      alignItems: "center",
-      gap: 0.5,
-      flexDirection: {
-        lg: "column",
-      },
-    },
-  };
-
-  return (
-    <Chip
-      onClick={async () => handleUpvote()}
-      label={
-        <>
-          <UpIcon />
-          {upvotes}
-        </>
-      }
-      sx={chipStyles}
-    />
-  );
-};
