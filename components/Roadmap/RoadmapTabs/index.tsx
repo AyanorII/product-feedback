@@ -2,12 +2,7 @@ import { TabContext, TabPanel } from "@mui/lab";
 import { Box, Tab, Tabs } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  INFO_DARK_COLOR,
-  IN_PROGRESS_COLOR,
-  LIVE_COLOR,
-  PLANNED_COLOR,
-} from "../../../lib/constants";
+import { COLORS_MAP } from "../../../lib/constants";
 import { ProductStatus } from "../../../lib/interfaces";
 import { RootState } from "../../../store/store";
 import RoadmapColumn, { RoadmapColumnProps } from "../RoadmapColumn";
@@ -20,13 +15,6 @@ const RoadmapTabs = (props: Props) => {
 
   const handleChange = (_e: SyntheticEvent, newValue: ProductStatus) => {
     setValue(newValue);
-  };
-
-  const colorsMap = {
-    [ProductStatus.PLANNED]: PLANNED_COLOR,
-    [ProductStatus.IN_PROGRESS]: IN_PROGRESS_COLOR,
-    [ProductStatus.LIVE]: LIVE_COLOR,
-    [ProductStatus.SUGGESTION]: INFO_DARK_COLOR,
   };
 
   const count = useSelector((state: RootState) => state.products.count);
@@ -56,9 +44,9 @@ const RoadmapTabs = (props: Props) => {
           value={value}
           onChange={handleChange}
           TabIndicatorProps={{
-            sx: tabIndicatorStyles(colorsMap[value] as string),
+            sx: tabIndicatorStyles(COLORS_MAP[value] as string),
           }}
-          sx={tabsStyles(colorsMap[value] as string)}
+          sx={tabsStyles(COLORS_MAP[value] as string)}
         >
           <Tab label="Planned" value={ProductStatus.PLANNED} />
           <Tab label="In-progress" value={ProductStatus.IN_PROGRESS} />

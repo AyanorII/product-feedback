@@ -1,3 +1,5 @@
+import { ProductStatus } from "./interfaces";
+
 /* --------------------------------- Colors --------------------------------- */
 export const PRIMARY_MAIN_COLOR = "#4661E6";
 export const PRIMARY_LIGHT_COLOR = "#7C91F9";
@@ -14,8 +16,11 @@ export const LIVE_COLOR = "#62BCFA";
 
 export const LIGHT_COLOR = "#FFFFFF";
 export const BACKGROUND_COLOR = "#F2F4FF";
-/* --------------------------------- Colors --------------------------------- */
 
-/* --------------------------------- Product -------------------------------- */
-// export const PRODUCT_CATEGORIES =
-/* --------------------------------- Product -------------------------------- */
+export const COLORS_MAP = {
+  [ProductStatus.PLANNED]: PLANNED_COLOR,
+  [ProductStatus.IN_PROGRESS]: IN_PROGRESS_COLOR,
+  [ProductStatus.LIVE]: LIVE_COLOR,
+  [ProductStatus.SUGGESTION]: INFO_DARK_COLOR,
+};
+/* --------------------------------- Colors --------------------------------- */
