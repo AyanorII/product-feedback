@@ -1,6 +1,7 @@
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
+import Link from "next/link";
 import { COLORS_MAP } from "../../lib/constants";
-import { capitalize } from "../../lib/helpers";
+import { capitalize, truncate } from "../../lib/helpers";
 import { Product, ProductCategory } from "../../lib/interfaces";
 import CategoryChip from "../CategoryChip";
 import CommentButton from "../CommentButton";
@@ -11,35 +12,68 @@ type ProductCardProps = {
 };
 
 const RoadmapProductCard = ({ product }: ProductCardProps) => {
-  const { title, description, comments, status } = product;
+  const { title, description, comments, status, id } = product;
+
   return (
-    <Card sx={{ borderTop: `6px solid ${COLORS_MAP[status]}` }}>
-      <CardContent>
-        <Stack flexDirection="row" alignItems="center" gap={1} marginBottom={1}>
-          <Box
-            borderRadius="50%"
-            width="8px"
-            height="8px"
-            sx={{ backgroundColor: COLORS_MAP[status] }}
-          />
-          <Typography color="GrayText">
-            {capitalize(status).replace("_", "-")}
-          </Typography>
-        </Stack>
-        <Typography fontWeight="bold" gutterBottom>
-          {title}
-        </Typography>
-        <Typography color="GrayText" marginBottom={1}>
-          {description}
-        </Typography>
-        <CategoryChip category={ProductCategory.FEATURE} />
-        <Stack flexDirection="row" justifyContent="space-between" marginTop={2}>
-          <UpvoteButton product={product} />
-          <CommentButton comments={comments?.length || 0} />
-        </Stack>
-      </CardContent>
-    </Card>
+    <Box sx={{ position: "relative" }}>
+      <Link
+        href={`/products/${id}`}
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        <Card
+          sx={{
+            borderTop: `6px solid ${COLORS_MAP[status]}`,
+            minHeight: "250px",
+          }}
+        >
+          <CardContent
+            sx={{
+              height: "250px",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Stack
+              flexDirection="row"
+              alignItems="center"
+              gap={1}
+              marginBottom={1}
+            >
+              <Box
+                borderRadius="50%"
+                width="8px"
+                height="8px"
+                sx={{ backgroundColor: COLORS_MAP[status] }}
+              />
+              <Typography color="GrayText">
+                {capitalize(status).replace("_", "-")}
+              </Typography>
+            </Stack>
+            <div>
+              <Typography fontWeight="bold" variant="h6" gutterBottom>
+                {title}
+              </Typography>
+              <Typography
+                color="GrayText"
+                variant="body2"
+                marginBottom={1}
+                maxWidth="50ch"
+              >
+                {truncate(description, 75)}
+              </Typography>
+              <CategoryChip category={ProductCategory.FEATURE} />
+            </div>
+          </CardContent>
+        </Card>
+      </Link>
+      <Box position="absolute" bottom={15} left={15}>
+        <UpvoteButton product={product} direction="row" />
+      </Box>
+      <Box position="absolute" bottom={15} right={15}>
+        <CommentButton comments={comments?.length || 0} />
+      </Box>
+    </Box>
   );
 };
 
-export default RoadmapProductCard
+export default RoadmapProductCard;

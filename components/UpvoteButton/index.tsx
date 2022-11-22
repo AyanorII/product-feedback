@@ -1,15 +1,15 @@
 import UpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Chip } from "@mui/material";
+import { Chip, SxProps } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { Product } from "../../lib/interfaces";
-import { chipStyles } from "./styles";
 
 type UpvoteButtonProps = {
   product: Product;
+  direction?: "row" | "column";
 };
 
-const UpvoteButton = ({ product }: UpvoteButtonProps) => {
+const UpvoteButton = ({ product, direction = "column" }: UpvoteButtonProps) => {
   const [upvotes, setUpvotes] = useState(product.upvotes);
 
   const handleUpvote = async () => {
@@ -23,6 +23,18 @@ const UpvoteButton = ({ product }: UpvoteButtonProps) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const chipStyles: SxProps = {
+    paddingBlock: { lg: direction === "column" ? "2rem" : "0" },
+    "& span": {
+      display: "flex",
+      alignItems: "center",
+      gap: 0.5,
+      flexDirection: {
+        lg: direction || "column",
+      },
+    },
   };
 
   return (

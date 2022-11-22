@@ -8,34 +8,16 @@ import { RootState } from "../../../store/store";
 import RoadmapColumn, { RoadmapColumnProps } from "../RoadmapColumn";
 import { tabIndicatorStyles, tabsStyles } from "./styles";
 
-type Props = {};
+type Props = {
+  columns: RoadmapColumnProps[]
+};
 
-const RoadmapTabs = (props: Props) => {
+const RoadmapTabs = ({columns}: Props) => {
   const [value, setValue] = useState(ProductStatus.PLANNED);
 
   const handleChange = (_e: SyntheticEvent, newValue: ProductStatus) => {
     setValue(newValue);
   };
-
-  const count = useSelector((state: RootState) => state.products.count);
-
-  const columns: RoadmapColumnProps[] = [
-    {
-      status: ProductStatus.PLANNED,
-      quantity: count.planned,
-      description: "Ideas prioritized for research",
-    },
-    {
-      status: ProductStatus.IN_PROGRESS,
-      quantity: count.inProgress,
-      description: "Currently being developed",
-    },
-    {
-      status: ProductStatus.LIVE,
-      quantity: count.live,
-      description: "Released features",
-    },
-  ];
 
   return (
     <TabContext value={value}>
