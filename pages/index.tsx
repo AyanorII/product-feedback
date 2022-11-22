@@ -91,7 +91,10 @@ const Home: NextPage<Props> = ({ suggestions, count }: Props) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <Container disableGutters={isMobile} sx={{ marginBlock: { lg: 6 } }}>
+    <Container
+      disableGutters={isMobile}
+      sx={{ marginBlock: { lg: 6 }, marginBottom: 5 }}
+    >
       <Grid container spacing={{ lg: 3 }}>
         <Grid item xs={12} lg={3}>
           {isMobile ? <MobileHeader /> : <Header />}
@@ -101,7 +104,7 @@ const Home: NextPage<Props> = ({ suggestions, count }: Props) => {
             sx={{
               position: "relative",
               overflow: {
-                xs: "hidden",
+                // xs: "hidden",
                 lg: "visible",
               },
               flexGrow: 1,
@@ -118,7 +121,7 @@ const Home: NextPage<Props> = ({ suggestions, count }: Props) => {
           >
             <FilterAddFeedback />
             <Container disableGutters={!isMobile}>
-              <Stack gap={1.5} mt={3}>
+              <Stack gap={3} mt={3} height="100%">
                 {filteredProducts.map((product) => {
                   return <ProductCard key={product.id} product={product} />;
                 })}

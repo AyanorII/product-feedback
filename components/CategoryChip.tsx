@@ -16,14 +16,18 @@ const CategoryChip = ({ category, sx }: Props) => {
     (state: RootState) => state.products.activeCategory
   );
 
-  const handleActiveCategory = (category: AllCategories) => {
+  const handleActiveCategory = (
+    e: React.MouseEvent,
+    category: AllCategories
+  ) => {
+    e.preventDefault();
     dispatch(setActiveCategory(category));
   };
 
   return (
     <Chip
       label={capitalize(category)}
-      onClick={() => handleActiveCategory(category)}
+      onClick={(e) => handleActiveCategory(e, category)}
       className={
         activeCategory.toLowerCase() === category.toLowerCase() ? "active" : ""
       }

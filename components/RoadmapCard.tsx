@@ -31,7 +31,7 @@ const RoadmapCard = () => {
   ];
 
   return (
-    <Card sx={{ padding: 3, borderRadius: "10px", height: "100%" }}>
+    <Card sx={{ padding: 3, borderRadius: "10px", height: {sm: "100%"} }}>
       <CardContent sx={{ padding: "0 !important" }}>
         <Stack
           flexDirection="row"

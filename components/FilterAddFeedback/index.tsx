@@ -1,8 +1,6 @@
-import { Add } from "@mui/icons-material";
 import CheckIcon from "@mui/icons-material/Check";
 import IdeaIcon from "@mui/icons-material/TipsAndUpdates";
 import {
-  Button,
   Container,
   MenuItem,
   Select,
@@ -41,7 +39,12 @@ const FilterAddFeedback = (props: Props) => {
 
   return (
     <Container maxWidth={false} disableGutters={!isMobile} sx={containerStyles}>
-      <Stack flexDirection="row" alignItems="center" gap={4} sx={stackStyles}>
+      <Stack
+        flexDirection="row"
+        alignItems="center"
+        gap={{ sm: 3 }}
+        sx={stackStyles}
+      >
         <Stack
           flexDirection="row"
           gap={2}
@@ -55,9 +58,9 @@ const FilterAddFeedback = (props: Props) => {
         </Stack>
         <Select
           defaultValue="most upvotes"
-          onChange={(e: SelectChangeEvent) =>
-            dispatch(setSortByOption(e.target.value as SortProductsBy))
-          }
+          onChange={(e: SelectChangeEvent) => {
+            dispatch(setSortByOption(e.target.value as SortProductsBy));
+          }}
           sx={selectStyles}
           MenuProps={{ sx: selectMenuStyles }}
         >

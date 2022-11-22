@@ -1,7 +1,7 @@
 import ClickAwayListener from "@mui/base/ClickAwayListener";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
-import { IconButton, Stack, Typography } from "@mui/material";
+import { IconButton, Stack, Typography, useMediaQuery } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -41,7 +41,9 @@ const MobileHeader = (props: Props) => {
       const header = ref.current as unknown as HTMLElement;
       dispatch(setHeaderHeight(header.offsetHeight));
     }
-  }, [ref.current]);
+
+    document.body.style.overflow = isMenuOpen ? "hidden" : "auto"
+  }, [ref.current, isMenuOpen]);
 
   return (
     <ClickAwayListener onClickAway={closeMenu}>

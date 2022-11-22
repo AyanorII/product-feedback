@@ -26,13 +26,13 @@ const UpvoteButton = ({ product, direction = "column" }: UpvoteButtonProps) => {
   };
 
   const chipStyles: SxProps = {
-    paddingBlock: { lg: direction === "column" ? "2rem" : "0" },
+    paddingBlock: { sm: direction === "column" ? "2rem" : "0" },
     "& span": {
       display: "flex",
       alignItems: "center",
       gap: 0.5,
       flexDirection: {
-        lg: direction || "column",
+        sm: direction || "column",
       },
     },
   };

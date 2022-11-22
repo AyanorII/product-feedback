@@ -1,5 +1,6 @@
-import { Card, CardContent, Grid, Typography } from "@mui/material";
+import { Box, Card, CardContent, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
+import Link from "next/link";
 import { Product } from "../lib/interfaces";
 import CategoryChip from "./CategoryChip";
 import CommentButton from "./CommentButton";
@@ -10,28 +11,38 @@ type Props = {
 };
 
 const ProductCard = ({ product }: Props) => {
-  const { comments } = product;
+  const { comments, id } = product;
 
   return (
-    <Card>
-      <CardContent sx={{ padding: 3 }}>
-        <Grid container spacing={{ xs: 2, md: 3, lg: 4 }}>
-          <Grid item xs={12} sm>
+    <Card sx={{ position: "relative" }}>
+      <Link
+        href={`/products/${id}`}
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        <CardContent sx={{ padding: 3 }}>
+          <Box paddingBottom={{ xs: 6, sm: 0 }} paddingLeft={{ sm: 9 }}>
             <Info product={product} />
-          </Grid>
-          <Grid
-            item
-            xs={6}
-            sm="auto"
-            sx={{ order: { sm: -1 }, paddingBlock: { lg: "2rem" } }}
-          >
-            <UpvoteButton product={product} />
-          </Grid>
-          <Grid item xs={6} sm="auto" display="flex" justifyContent="end">
-            <CommentButton comments={comments?.length || 0} />
-          </Grid>
-        </Grid>
-      </CardContent>
+          </Box>
+        </CardContent>
+      </Link>
+      <Box
+        position="absolute"
+        bottom={{ xs: 15, sm: "unset" }}
+        top={{ sm: 25 }}
+        left={25}
+      >
+        <UpvoteButton product={product} />
+      </Box>
+      <Box
+        position="absolute"
+        bottom={{ xs: 10, sm: "50%" }}
+        right={15}
+        sx={{
+          transform: { sm: "translateY(50%)" },
+        }}
+      >
+        <CommentButton comments={comments?.length || 0} />
+      </Box>
     </Card>
   );
 };
