@@ -6,7 +6,9 @@ import { ProductsCount } from "../lib/interfaces";
 import { setInProgress, setLive, setPlanned } from "../store/productsSlice";
 
 export const getServerSideProps = async () => {
-  const response = await axios.get("http://localhost:8000/products/count");
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/products/count`
+  );
   const { data: count } = response;
 
   return {

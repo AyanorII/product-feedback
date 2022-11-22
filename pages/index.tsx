@@ -17,11 +17,13 @@ import { RootState } from "../store/store";
 
 export const getServerSideProps = async () => {
   const suggestionsResponse = await axios.get(
-    "http://localhost:8000/products/suggestions"
+    `${process.env.NEXT_PUBLIC_API_URL}/products/suggestions`
   );
   const { data: suggestions } = await suggestionsResponse;
 
-  const countResponse = await axios.get("http://localhost:8000/products/count");
+  const countResponse = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/products/count`
+  );
 
   const { data: count } = await countResponse;
 
