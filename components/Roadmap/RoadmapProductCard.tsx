@@ -46,7 +46,7 @@ const RoadmapProductCard = ({ product }: ProductCardProps) => {
                 sx={{ backgroundColor: COLORS_MAP[status] }}
               />
               <Typography color="GrayText">
-                {capitalize(status).replace("_", "-")}
+                {capitalize(status)}
               </Typography>
             </Stack>
             <div>

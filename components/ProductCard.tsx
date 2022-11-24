@@ -11,7 +11,7 @@ type Props = {
 };
 
 const ProductCard = ({ product }: Props) => {
-  const { comments, id } = product;
+  const { comments_count, id } = product;
 
   return (
     <Card sx={{ position: "relative" }}>
@@ -41,7 +41,7 @@ const ProductCard = ({ product }: Props) => {
           transform: { sm: "translateY(50%)" },
         }}
       >
-        <CommentButton comments={comments?.length || 0} />
+        <CommentButton comments={comments_count} />
       </Box>
     </Card>
   );

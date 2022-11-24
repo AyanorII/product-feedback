@@ -6,7 +6,11 @@ import FilterAddFeedback from "../components/FilterAddFeedback";
 import Header from "../components/Header";
 import MobileHeader from "../components/MobileHeader";
 import ProductCard from "../components/ProductCard";
-import { Product, ProductsCount, SortProductsBy } from "../lib/interfaces";
+import {
+  Product,
+  ProductsCountResponse,
+  SortProductsBy,
+} from "../lib/interfaces";
 import {
   setInProgress,
   setLive,
@@ -37,17 +41,21 @@ export const getServerSideProps = async () => {
 
 type Props = {
   suggestions: Product[];
-  count: ProductsCount;
+  count: ProductsCountResponse;
 };
 
 const Home: NextPage<Props> = ({ suggestions, count }: Props) => {
   const dispatch = useDispatch();
-
-  const { inProgress, planned, live, suggestion } = count;
+  const {
+    in_progress: inProgress,
+    planned,
+    live,
+    suggestions: suggestionCount,
+  } = count;
   dispatch(setInProgress(inProgress));
   dispatch(setLive(live));
   dispatch(setPlanned(planned));
-  dispatch(setSuggestion(suggestion));
+  dispatch(setSuggestion(suggestionCount));
 
   const sortByOption = useSelector(
     (state: RootState) => state.products.sortByOption

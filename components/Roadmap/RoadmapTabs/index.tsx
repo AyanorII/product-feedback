@@ -1,18 +1,16 @@
 import { TabContext, TabPanel } from "@mui/lab";
 import { Box, Tab, Tabs } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
-import { useSelector } from "react-redux";
 import { COLORS_MAP } from "../../../lib/constants";
 import { ProductStatus } from "../../../lib/interfaces";
-import { RootState } from "../../../store/store";
 import RoadmapColumn, { RoadmapColumnProps } from "../RoadmapColumn";
 import { tabIndicatorStyles, tabsStyles } from "./styles";
 
 type Props = {
-  columns: RoadmapColumnProps[]
+  columns: RoadmapColumnProps[];
 };
 
-const RoadmapTabs = ({columns}: Props) => {
+const RoadmapTabs = ({ columns }: Props) => {
   const [value, setValue] = useState(ProductStatus.PLANNED);
 
   const handleChange = (_e: SyntheticEvent, newValue: ProductStatus) => {
