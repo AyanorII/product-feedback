@@ -14,7 +14,7 @@ import { capitalize } from "../../lib/helpers";
 import { SortProductsBy } from "../../lib/interfaces";
 import { setSortByOption } from "../../store/productsSlice";
 import { RootState } from "../../store/store";
-import AddFeedbackButton from "../AddFeedbackButton";
+import { AddFeedbackButton } from "../Buttons";
 import {
   containerStyles,
   menuItemStyles,

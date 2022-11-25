@@ -2,9 +2,8 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import Link from "next/link";
 import { Product } from "../lib/interfaces";
+import { CommentButton, UpvoteButton } from "./Buttons";
 import CategoryChip from "./CategoryChip";
-import CommentButton from "./CommentButton";
-import UpvoteButton from "./UpvoteButton";
 
 type Props = {
   product: Product;

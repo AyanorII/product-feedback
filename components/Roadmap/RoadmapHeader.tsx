@@ -1,13 +1,6 @@
-import GoBackIcon from "@mui/icons-material/KeyboardArrowLeft";
-import {
-  Button,
-  Container,
-  Stack,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
-import { INFO_DARK_COLOR } from "../../lib/constants";
-import AddFeedbackButton from "../AddFeedbackButton";
+import { Container, Stack, Typography, useMediaQuery } from "@mui/material";
+import { INFO_DARK_COLOR, LIGHT_COLOR } from "../../lib/constants";
+import { AddFeedbackButton, GoBackButton } from "../Buttons";
 
 type Props = {};
 
@@ -29,9 +22,7 @@ const RoadmapHeader = (props: Props) => {
         }}
       >
         <Stack>
-          <Button variant="text" href="/" startIcon={<GoBackIcon />}>
-            Go Back
-          </Button>
+          <GoBackButton color={LIGHT_COLOR} />
           <Typography
             variant="h6"
             color="#FFF"
