@@ -27,6 +27,8 @@ export interface Comment {
   userId: number;
   product: Product;
   productId: number;
+  replying_to?: string;
+  replies: Comment[];
   createdAt?: Date;
   updatedAt?: Date;
 }
