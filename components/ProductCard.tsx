@@ -2,16 +2,15 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import Link from "next/link";
 import { Product } from "../lib/interfaces";
+import { CommentButton, UpvoteButton } from "./Buttons";
 import CategoryChip from "./CategoryChip";
-import CommentButton from "./CommentButton";
-import UpvoteButton from "./UpvoteButton";
 
 type Props = {
   product: Product;
 };
 
 const ProductCard = ({ product }: Props) => {
-  const { comments, id } = product;
+  const { comments_count, id } = product;
 
   return (
     <Card sx={{ position: "relative" }}>
@@ -41,7 +40,7 @@ const ProductCard = ({ product }: Props) => {
           transform: { sm: "translateY(50%)" },
         }}
       >
-        <CommentButton comments={comments?.length || 0} />
+        <CommentButton comments={comments_count} />
       </Box>
     </Card>
   );

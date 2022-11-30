@@ -3,9 +3,8 @@ import Link from "next/link";
 import { COLORS_MAP } from "../../lib/constants";
 import { capitalize, truncate } from "../../lib/helpers";
 import { Product, ProductCategory } from "../../lib/interfaces";
+import { CommentButton, UpvoteButton } from "../Buttons";
 import CategoryChip from "../CategoryChip";
-import CommentButton from "../CommentButton";
-import UpvoteButton from "../UpvoteButton";
 
 type ProductCardProps = {
   product: Product;
@@ -45,9 +44,7 @@ const RoadmapProductCard = ({ product }: ProductCardProps) => {
                 height="8px"
                 sx={{ backgroundColor: COLORS_MAP[status] }}
               />
-              <Typography color="GrayText">
-                {capitalize(status).replace("_", "-")}
-              </Typography>
+              <Typography color="GrayText">{capitalize(status)}</Typography>
             </Stack>
             <div>
               <Typography fontWeight="bold" variant="h6" gutterBottom>

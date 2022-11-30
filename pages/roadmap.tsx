@@ -6,7 +6,7 @@ import RoadmapColumn, {
 } from "../components/Roadmap/RoadmapColumn";
 import RoadmapHeader from "../components/Roadmap/RoadmapHeader";
 import RoadmapTabs from "../components/Roadmap/RoadmapTabs";
-import { ProductsCount, ProductStatus } from "../lib/interfaces";
+import { ProductsCountResponse, ProductStatus } from "../lib/interfaces";
 import { setInProgress, setLive, setPlanned } from "../store/productsSlice";
 
 export const getServerSideProps = async () => {
@@ -23,13 +23,14 @@ export const getServerSideProps = async () => {
 };
 
 type Props = {
-  count: ProductsCount;
+  count: ProductsCountResponse;
 };
 
 const RoadmapPage = ({ count }: Props) => {
   const dispatch = useDispatch();
 
-  const { inProgress, planned, live } = count;
+  const { in_progress: inProgress, planned, live } = count;
+
   dispatch(setInProgress(inProgress));
   dispatch(setLive(live));
   dispatch(setPlanned(planned));
@@ -60,7 +61,7 @@ const RoadmapPage = ({ count }: Props) => {
       {isMobile ? (
         <RoadmapTabs columns={columns} />
       ) : (
-        <Container sx={{marginTop: 5}}>
+        <Container sx={{ marginTop: 5 }}>
           <Grid container spacing={3}>
             {columns.map(({ status, description, quantity }) => (
               <Grid item xs key={status}>

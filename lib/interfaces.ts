@@ -1,8 +1,8 @@
 export enum ProductStatus {
-  PLANNED = "PLANNED",
-  LIVE = "LIVE",
-  IN_PROGRESS = "IN_PROGRESS",
-  SUGGESTION = "SUGGESTION",
+  PLANNED = "planned",
+  LIVE = "live",
+  IN_PROGRESS = "in-progress",
+  SUGGESTION = "suggestion",
 }
 
 export enum ProductCategory {
@@ -14,35 +14,38 @@ export enum ProductCategory {
 }
 
 export interface User {
-  id: string;
+  id: number;
   name: string;
   username: string;
   photo?: string;
 }
 
 export interface Comment {
-  id: string;
+  id: number;
   content: string;
   user: User;
-  userId: string;
+  userId: number;
   product: Product;
-  productId: string;
+  productId: number;
+  replying_to?: string;
+  replies: Comment[];
   createdAt?: Date;
   updatedAt?: Date;
 }
 
 export interface Product {
-  id: string;
+  id: number;
   title: string;
   description: string;
   category: ProductCategory;
   status: ProductStatus;
   upvotes: number;
-  userId: string;
+  userId: number;
   user: User;
   createdAt?: Date;
   updatedAt?: Date;
   comments: Comment[];
+  comments_count: number;
 }
 
 export type AllCategories = "all" | ProductCategory;
@@ -53,10 +56,13 @@ export enum SortProductsBy {
   MOST_COMMENTS = "most comments",
   LEAST_COMMENTS = "least comments",
 }
-
 export interface ProductsCount {
   planned: number;
   live: number;
   inProgress: number;
-  suggestion: number;
+  suggestions: number;
 }
+
+export type ProductsCountResponse = Omit<ProductsCount, "inProgress"> & {
+  in_progress: number;
+};
